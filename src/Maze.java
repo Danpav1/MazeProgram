@@ -6,6 +6,16 @@ import java.util.Stack;
  */
 
  /*
+  * -- SCOPE OF PROJECT --
+  * *not in any particular order*
+  * 
+  * - implement the ability to move start and end points
+  * - add a UI
+  * - generate mazes
+  * - read and write? the maze from a file
+  */
+
+ /*
   * ### TO-DO ###
   *
   * 1- the check surrounding nodes computation is done twice. 
@@ -15,6 +25,8 @@ import java.util.Stack;
   * 2- seems like createpath can be consolidated within the
   *     backtrack algorithm since the reading and moving
   *     via the stack is done again
+  *
+  * 3- see if anything can be put in its own class
   */
 
 public class Maze
