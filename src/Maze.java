@@ -10,27 +10,17 @@ import java.util.Stack;
   * -- SCOPE OF PROJECT --
   * *not in any particular order*
   * 
-  * - implement the ability to move start and end points -CLOSED
   * - add a UI
   * - generate mazes
   * - read and write? the maze from a file
   * - create an abstract maze class and have different maze
   *      algorithms as child classes?
-  * - add exception when there is no path -CLOSED
   */
 
  /*
   * ### TO-DO ###
-  *
-  * 1- the check surrounding nodes computation is done twice. 
-  *     once before the backtrack algorithm and once during.
-  *     Computing only once would be more efficient.
-  *
-  * 2- seems like createpath can be consolidated within the
-  *     backtrack algorithm since the reading and moving
-  *     via the stack is done again
-  *
-  * 3- see if anything can be put in its own class
+  * 1- fix bug where maze has to be a square
+  * 2- see if anything can be put in its own class
   */
 
 public class Maze
@@ -125,6 +115,9 @@ public class Maze
      */
     public void solveMaze()
     {
+        System.out.println("Unsolved Maze: ");
+        printMaze();
+
         int x = startPosition[0];
         int y = startPosition[1];
 
@@ -247,7 +240,7 @@ public class Maze
             }
             catch(EmptyStackException e)
             {
-                System.out.println("EmptyStackException - The maze has no path.");
+                System.out.println("\nEmptyStackException - The maze has no path.");
             }  
 
             //takes stack directions
