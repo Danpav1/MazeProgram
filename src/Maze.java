@@ -13,6 +13,9 @@ import java.util.Stack;
   * - add a UI
   * - generate mazes
   * - read and write? the maze from a file
+  * - create an abstract maze class and have different maze
+  *      algorithms as child classes?
+  * - add exception when there is no path
   */
 
  /*
@@ -33,6 +36,7 @@ public class Maze
 {
     //instance variables
     int[][] maze;
+    String[][] solvedMaze;
 
     Stack<String> directions = new Stack<String>();
 
@@ -46,6 +50,8 @@ public class Maze
     //end position is bottem right of maze
     int[] endPosition = new int[2];
 
+    //colors used for string maze
+    public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
 
     /*
@@ -57,6 +63,8 @@ public class Maze
         maze = m;
         endPosition[0] = maze.length - 1;
         endPosition[1] = maze[0].length - 1;
+
+        solvedMaze = new String[maze.length][maze[0].length];
     }
 
     /*
@@ -136,6 +144,7 @@ public class Maze
 
         return solved;
     }
+
     /*
      * backtracking algorithm
      * @param int x, int y
@@ -323,6 +332,49 @@ public class Maze
             for (int column = 0; column < maze[row].length; column++)
             {
                 System.out.print(maze[row][column] + "  ");
+            }
+        }
+    }
+
+    /*
+     * method that duplicates the solved int maze and saves it as a string 2d
+     *  array for easier manipulation when printing
+     */
+    public void copyMaze()
+    {
+        String ch;
+        for (int row = 0; row < maze.length; row++)
+        {
+            for (int column = 0; column < maze[row].length; column++)
+            {
+                ch = String.valueOf(maze[row][column]);
+                solvedMaze[row][column] = ch;
+            }
+        }
+    }
+
+    /*
+     * method that prints the String maze
+     */
+    public void printStringMaze()
+    {
+        for (int row = 0; row < solvedMaze.length; row++)
+        {
+            System.out.println();
+            for (int column = 0; column < solvedMaze[row].length; column++)
+            {
+                if (solvedMaze[row][column].equals("3"))
+                {
+                    System.out.print(ANSI_GREEN + "3" + ANSI_RESET + "  ");
+                }
+                else if (solvedMaze[row][column].equals("2"))
+                {
+                    System.out.print("0" + "  ");
+                }
+                else
+                {
+                    System.out.print(solvedMaze[row][column] + "  ");
+                }
             }
         }
     }
