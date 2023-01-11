@@ -61,7 +61,7 @@ public class MazeRunnable
                          {1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1},
                          {1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0}};
 
-        Maze m = new Maze(maze3);
+        Maze m = new Maze(maze, 0, 0, 5, 5);
 
         System.out.println("The unsolved maze:");
 
