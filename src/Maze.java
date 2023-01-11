@@ -1,3 +1,4 @@
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 /*
@@ -9,13 +10,13 @@ import java.util.Stack;
   * -- SCOPE OF PROJECT --
   * *not in any particular order*
   * 
-  * - implement the ability to move start and end points
+  * - implement the ability to move start and end points -CLOSED
   * - add a UI
   * - generate mazes
   * - read and write? the maze from a file
   * - create an abstract maze class and have different maze
   *      algorithms as child classes?
-  * - add exception when there is no path
+  * - add exception when there is no path -CLOSED
   */
 
  /*
@@ -46,7 +47,7 @@ public class Maze
     static final int PATH = 3;
 
     //start position is top left of maze
-    int[] startPosition = {0, 0};
+    int[] startPosition = new int[2];
     //end position is bottem right of maze
     int[] endPosition = new int[2];
 
@@ -55,20 +56,72 @@ public class Maze
     public static final String ANSI_GREEN = "\u001B[32m";
 
     /*
-     * constructor
+     * default constructor where the start points are in the top left
+     *  and the end points are in the bottom right
      * @param int[][] m
      */
     public Maze(int[][] m)
     {
         maze = m;
+
+        //saves the start & end points
+        startPosition[0] = 0;
+        startPosition[1] = 0;
         endPosition[0] = maze.length - 1;
         endPosition[1] = maze[0].length - 1;
 
+        //creates a 2d string array of the same size as the int 2d array
+        solvedMaze = new String[maze.length][maze[0].length];
+    }
+
+    /*
+     * overloaded constructor to accept custom start and end points
+     * @param int[][] m
+     */
+    public Maze(int[][] m, int sX, int sY, int eX, int eY)
+    {
+        maze = m;
+
+        //handling for bad start and end coords
+        boolean error = false;
+        if (sX < 0 || sX > maze.length - 1)
+        {
+            System.out.println("Inputted start x coordinate out of array bounds");
+            error = true;
+        }
+        if (sY < 0 || sY > maze[0].length - 1)
+        {
+            System.out.println("Inputted start y coordinate out of array bounds");
+            error = true;
+        }
+        if (eX < 0 || eX > maze.length - 1)
+        {
+            System.out.println("Inputted end x coordinate out of array bounds");
+            error = true;
+        }
+        if (eY < 0 || eY > maze[0].length - 1)
+        {
+            System.out.println("Inputted end y coordinate out of array bounds");
+            error = true;
+        }
+        if (error)
+        {
+            System.exit(0);
+        }
+
+        //saves the start & end points
+        startPosition[0] = sX;
+        startPosition[1] = sY;
+        endPosition[0] = eX;
+        endPosition[1] = eY;
+
+        //creates a 2d string array of the same size as the int 2d array
         solvedMaze = new String[maze.length][maze[0].length];
     }
 
     /*
      * method that initiates the solving of the maze
+     * @param int x, int y (starting coords)
      */
     public void solveMaze()
     {
@@ -84,7 +137,7 @@ public class Maze
      * @param int x, int y
      * @return boolean solved
      */
-    public boolean traverse(int x, int y)
+    public boolean traverse(int x, int y) 
     {
         //method variables
         boolean solved = false;
@@ -187,7 +240,15 @@ public class Maze
           */
          else
         {
-            directionToTake = directions.pop();
+            //exception handling for when the maze has no path
+            try
+            {
+                directionToTake = directions.pop();
+            }
+            catch(EmptyStackException e)
+            {
+                System.out.println("EmptyStackException - The maze has no path.");
+            }  
 
             //takes stack directions
             if (directionToTake == "up")
@@ -322,7 +383,7 @@ public class Maze
     }
 
     /*
-     * method that prints the maze
+     * method that prints the int maze
      */
     public void printMaze()
     {
