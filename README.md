@@ -16,3 +16,11 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
+##### TO DO #####
+
+- add a GUI
+- generate mazes
+- turn the program into a downloadable exe file that is not machine dependent
+- fix bug where maze has to be a square
+- add another pathfinding algorithm (A*)?
