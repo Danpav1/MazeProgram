@@ -1,4 +1,4 @@
-import java.util.EmptyStackException;
+
 import java.util.Stack;
 
 /*
@@ -6,24 +6,7 @@ import java.util.Stack;
  * @author Gooomba
  */
 
- /*
-  * -- SCOPE OF PROJECT --
-  * *not in any particular order*
-  * 
-  * - add a UI
-  * - generate mazes
-  * - read and write? the maze from a file
-  * - create an abstract maze class and have different maze
-  *      algorithms as child classes?
-  */
-
- /*
-  * ### TO-DO ###
-  * 1- fix bug where maze has to be a square
-  * 2- see if anything can be put in its own class
-  */
-
-public class Maze
+public abstract class Maze
 {
     //instance variables
     int[][] maze;

@@ -96,22 +96,57 @@ public class MazeRunnable
      */
     public static void main(String[] args) throws Exception
     {
-        String filename = "";
+        /*
+         * filename selection screen in console
+         */
+        Scanner fileNameSaver = new Scanner(new File("previousinput.txt"));
+        String fileNameSaverinput = "";
 
-        System.out.println("Enter the file name");
-        Scanner scan = new Scanner(System.in);
-        filename = scan.nextLine();
-
-        try
+        if (fileNameSaver.hasNext())
         {
-            readMaze(filename);
-        }
-        catch (FileNotFoundException e)
-        {
-            System.out.println("ERROR: file not found.");
-            System.exit(0);
+            fileNameSaverinput = fileNameSaver.nextLine();
+
+            Scanner previousSelector = new Scanner(System.in);
+        
+            System.out.println("Would you like to use the last filename used?");
+            System.out.println("1 : Yes");
+            System.out.println("2 : No");
+
+            String selection = previousSelector.nextLine();
+
+            switch (selection)
+            {
+                case "1":
+                    readMaze(fileNameSaverinput);
+                    break;
+
+                case "2":
+                    String filename = "";
+                    System.out.println("Enter the file name");
+                    Scanner scan = new Scanner(System.in);
+                    filename = scan.nextLine();
+            
+                    //exception handling
+                    try
+                    {
+                        readMaze(filename);
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        System.out.println("ERROR: file not found.");
+                        System.exit(0);
+                    }
+                    break;
+
+                default:
+                    System.out.println("Invalid input");
+            }
         }
 
+        /*
+         * algorithm picking screen in console
+         * is expandable to add different algorithms
+         */
         Scanner algorithmSelector = new Scanner(System.in);
         boolean valid = false;
 
@@ -137,16 +172,15 @@ public class MazeRunnable
 
                 case "9":
                     System.out.println("Exiting");
-                    scan.close();
                     algorithmSelector.close();
                     System.exit(0);
 
                 default:
-                    System.out.println("Not a valid selection");
+                    System.out.println("Invalid input");
                     break;
             }
         }
-        scan.close();
         algorithmSelector.close();
+        fileNameSaver.close();
     }
 }
