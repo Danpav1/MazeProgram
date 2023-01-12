@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /*
@@ -9,9 +10,11 @@ import java.util.Scanner;
 public class MazeRunnable
 {
     //instance variables
-    //maze[y][x]
+    static int[][] maze;
+    static int x, y = 0;
 
     /*
+     * maze[y][x]
      * some hard coded test mazes
      * 0 = open
      * 1 = wall
@@ -60,19 +63,12 @@ public class MazeRunnable
                             {1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0},
                             {1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1},
                             {1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0}};
-
-
-    public static void main(String[] args) throws Exception
+    /*
+     * method that reads the specific maze file
+     * @param String filename
+     */
+    public static void readMaze(String filename) throws FileNotFoundException
     {
-        /*
-        int[][] maze;
-        int x, y = 0;
-        String filename = "";
-
-        System.out.println("Enter the file name");
-        Scanner scan = new Scanner(System.in);
-        filename = scan.nextLine();
-    
         Scanner myScanner = new Scanner(new File(filename));
 
         //reads and saves the first line(s) values which are the scale of the maze
@@ -92,15 +88,65 @@ public class MazeRunnable
             }
         }
         myScanner.close();
-        */
-        MazeGenerator mg = new MazeGenerator(50, 50);
-        Maze m = new Maze(mg.getGeneratedMaze());
+    }
 
-        m.solveMaze();
+    /*
+     * main method
+     * @param String[] args
+     */
+    public static void main(String[] args) throws Exception
+    {
+        String filename = "";
 
-        System.out.println("\nThe solved maze:");
+        System.out.println("Enter the file name");
+        Scanner scan = new Scanner(System.in);
+        filename = scan.nextLine();
 
-        m.copyMaze();
-        m.printStringMaze();
+        try
+        {
+            readMaze(filename);
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("ERROR: file not found.");
+            System.exit(0);
+        }
+
+        Scanner algorithmSelector = new Scanner(System.in);
+        boolean valid = false;
+
+        while (!valid)
+            {
+            System.out.println("Which algorithm would you like to choose? Pick the number corresponding to your choice.");
+            System.out.println("\t" + "1 : DepthSearchAlgorithm");
+            System.out.println("\t" + "9 : Exit this selection screen");
+
+            String input = "";
+            input = algorithmSelector.nextLine();
+
+            switch (input)
+            {
+                case "1":
+                    valid = true;
+                    DepthSearchAlgorithm dsa = new DepthSearchAlgorithm(maze);
+                    dsa.solveMaze();
+                    System.out.println("\nThe solved maze:");
+                    dsa.copyMaze();
+                    dsa.printStringMaze();
+                break;
+
+                case "9":
+                    System.out.println("Exiting");
+                    scan.close();
+                    algorithmSelector.close();
+                    System.exit(0);
+
+                default:
+                    System.out.println("Not a valid selection");
+                    break;
+            }
+        }
+        scan.close();
+        algorithmSelector.close();
     }
 }
