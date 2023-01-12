@@ -66,7 +66,7 @@ public class Maze
 
     /*
      * overloaded constructor to accept custom start and end points
-     * @param int[][] m
+     * @param @param int[][] m, int sX, int sY, int eX, int eY
      */
     public Maze(int[][] m, int sX, int sY, int eX, int eY)
     {
@@ -121,151 +121,14 @@ public class Maze
         int x = startPosition[0];
         int y = startPosition[1];
 
-        traverse(x, y);
-    }
-
-    /*
-     * the method that checks surrounding nodes and moves to
-     *  surrounding nodes if they meet certain criteria
-     * @param int x, int y
-     * @return boolean solved
-     */
-    public boolean traverse(int x, int y) 
-    {
-        //method variables
-        boolean solved = false;
-
-        //sets the inputted coords to TRIED (2)
-        setToTried(x, y);
-
-        //checks if the inputted coords are the end coords
-        if (isEnd(x, y))
-        {
-            solved = true;
-            createPath(x, y);
-        }
-
         /*
-         * if these coords are not the end coords
+         * logic can be inputted here for the user to choose what 
+         *  search algorithm they would like to use later
          */
-        if (!solved)
-        {
-            //try up
-            if (validPosition(x - 1, y))
-            {
-                directions.push("down");
-                traverse(x - 1, y);
-            }
-
-            //try left
-            else if (validPosition(x, y - 1))
-            {
-                directions.push("right");
-                traverse(x, y - 1);
-            }
-
-            //try right
-            else if (validPosition(x, y + 1))
-            {
-                directions.push("left");
-                traverse(x, y + 1);
-            }
-
-            //try down
-            else if (validPosition(x + 1, y))
-            {
-                directions.push("up");
-                traverse(x + 1, y);
-            }
-
-            /*
-             * since all four directions are not valid (deadend)
-             *  we iniatiate the backtrack algorithm
-             */
-            else
-            {
-                backTrack(x, y);
-            }
-        }
-
-        return solved;
-    }
-
-    /*
-     * backtracking algorithm
-     * @param int x, int y
-     */
-    public void backTrack(int x, int y)
-    {
-        //method variable(s)
-        String directionToTake = "";
-
-        /*
-         * checks surrounding nodes (checks for deadend)
-         */
-        //check above
-         if (validPosition(x - 1, y))
-         {
-             directions.push("down");
-             traverse(x - 1, y);
-         }
-        //check left
-         else if (validPosition(x, y - 1))
-         {
-             directions.push("right");
-             traverse(x, y - 1);
-         }
-        //check right
-         else if (validPosition(x, y + 1))
-         {
-             directions.push("left");
-             traverse(x, y + 1);
-         }
-        //check down
-         else if (validPosition(x + 1, y))
-         {
-             directions.push("up");
-             traverse(x + 1, y);
-         }
-         /*
-          * if none of the positions are valid (we are at a deadend) 
-          *   we pop the directions stack and move via that command.
-          */
-         else
-        {
-            //exception handling for when the maze has no path
-            try
-            {
-                directionToTake = directions.pop();
-            }
-            catch(EmptyStackException e)
-            {
-                System.out.println("\nEmptyStackException - The maze has no path.");
-            }  
-
-            //takes stack directions
-            if (directionToTake == "up")
-            {
-                backTrack(x - 1, y);
-
-            }
-            else if (directionToTake == "left")
-            {
-                backTrack(x, y - 1);
-
-            }
-            else if (directionToTake == "right")
-            {
-                backTrack(x, y + 1);
-                            
-            }
-            else if (directionToTake == "down")
-            {
-                backTrack(x + 1, y);
-            }
-        }
-    }
-
+        DepthSearchAlgorithm dsa = new DepthSearchAlgorithm(maze);
+        dsa.traverse(x, y);
+    } 
+    
     /*
      * method that creates a path within the maze array when 
      *  the maze is solved
