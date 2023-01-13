@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.FileWriter;
 
 /*
  * Runner class for maze
@@ -125,6 +126,8 @@ public class MazeRunnable
                     System.out.println("Enter the file name");
                     Scanner scan = new Scanner(System.in);
                     filename = scan.nextLine();
+
+                    FileWriter myFileWriter = new FileWriter("previousinput.txt");
             
                     //exception handling
                     try
@@ -136,10 +139,39 @@ public class MazeRunnable
                         System.out.println("ERROR: file not found.");
                         System.exit(0);
                     }
+                    finally
+                    {
+                        myFileWriter.write(filename);
+                        myFileWriter.close();
+                    }
                     break;
 
                 default:
                     System.out.println("Invalid input");
+            }
+        }
+        else
+        {
+            String filename = "";
+            System.out.println("Enter the file name");
+            Scanner scan = new Scanner(System.in);
+            filename = scan.nextLine();
+
+            FileWriter myFileWriter = new FileWriter("previousinput.txt");
+
+            try
+            {
+                readMaze(filename);
+            }
+            catch (FileNotFoundException e)
+            {
+                System.out.println("ERROR: file not found.");
+                System.exit(0);
+            }
+            finally
+            {
+                myFileWriter.write(filename);
+                 myFileWriter.close();
             }
         }
 

@@ -19,8 +19,8 @@ The `JAVA PROJECTS` view allows you to manage your dependencies. More details ca
 
 ##### TO DO #####
 
+- implement saving the last used filename *PRIORITY*
 - add a GUI
-- generate mazes
 - turn the program into a downloadable exe file that is not machine dependent
 - fix bug where maze has to be a square
 - add another pathfinding algorithm (A*)?
