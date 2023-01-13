@@ -35,14 +35,14 @@ public class MazeTerminalUI
      * 2 = tried
      * 3 = path
      */
-    static int[][] maze1 = {{0, 1, 1, 0, 0, 0},
+    static int[][] maze1 = {{0, 1, 1, 0, 0, 0}, // 6 by 6
                             {0, 0, 0, 0, 1, 1},
                             {0, 1, 1, 0, 0, 0},
                             {0, 0, 0, 1, 1, 0},
                             {0, 1, 1, 0, 1, 0},
                             {0, 0, 0, 0, 1, 0}};
 
-    static int[][] maze2 = {{0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0},
+    static int[][] maze2 = {{0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0}, // 11 by 11
                             {1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0},
                             {0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0},
                             {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
@@ -54,7 +54,7 @@ public class MazeTerminalUI
                             {0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
                             {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0}};
 
-    static int[][] maze3 = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+    static int[][] maze3 = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0}, // 23 by 23
                             {1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0},
                             {1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0},
                             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0},
@@ -141,6 +141,7 @@ public class MazeTerminalUI
 
         switch (mazeSelectionInput)
         {
+            //if Yes is selected
             case "1":
                 Scanner mazeSelector = new Scanner(System.in);
 
@@ -154,32 +155,39 @@ public class MazeTerminalUI
 
                 switch (mazeSelection)
                 {
+                    //if maze1 is selected
                     case "1":
                         startEndSelectionUI();
                         algorithmSelectionUI(maze1);
                         System.exit(0);
                         break;
 
+                    //if maze2 is selected
                     case "2":
                         startEndSelectionUI();
                         algorithmSelectionUI(maze2);
                         System.exit(0);
                         break;
 
+                    //if maze3 is selected
                     case "3":
                         startEndSelectionUI();
                         algorithmSelectionUI(maze3);
                         System.exit(0);
                         break;
 
+                    //if exit is selected
                     case "9":
                         System.out.println(ANSI_YELLOW + "Exiting" + ANSI_RESET);
                         System.exit(0);
                         break;
+                    
+                    //if the selection doesnt match any of the cases
                     default:
                         System.out.println("Invalid selection");
                 }
 
+            //if No is selected
             case "2":
                 break;
         }
@@ -307,7 +315,10 @@ public class MazeTerminalUI
                 eX = customCoord.nextInt();
                 eY = customCoord.nextInt();
 
-            default: 
+            //if the selection doesnt match any of the cases
+            default:
+                System.out.println("Invalid input");
+                break;
         };
     }
 
@@ -331,6 +342,7 @@ public class MazeTerminalUI
             {
             System.out.println("Which algorithm would you like to choose? Pick the number corresponding to your choice.");
             System.out.println("\t" + "1 : FloodFill");
+            System.out.println("\t" + "2 : Depth-First Search");
             System.out.println("\t" + "9 : Exit this selection screen");
 
             String input = "";
@@ -338,6 +350,7 @@ public class MazeTerminalUI
 
             switch (input)
             {
+                //if FloodFill is selected
                 case "1":
                     valid = true;
                     if (def)
@@ -358,11 +371,18 @@ public class MazeTerminalUI
                     }
                 break;
 
+                //if DepthFirstSearch is selected
+                case "2":
+                    valid = true;
+                    DepthFirstSearchAlgorithm dfsa = new DepthFirstSearchAlgorithm();
+                    break;
+
                 case "9":
                     System.out.println(ANSI_YELLOW + "Exiting" + ANSI_RESET);
                     algorithmSelector.close();
                     System.exit(0);
 
+                //if the selection doesnt match any of the cases
                 default:
                     System.out.println("Invalid input");
                     break;
