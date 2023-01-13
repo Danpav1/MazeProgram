@@ -374,7 +374,8 @@ public class MazeTerminalUI
                 //if DepthFirstSearch is selected
                 case "2":
                     valid = true;
-                    DepthFirstSearchAlgorithm dfsa = new DepthFirstSearchAlgorithm();
+                    DepthFirstSearchAlgorithm dfsa = new DepthFirstSearchAlgorithm(m);
+                    dfsa.solveMaze();
                     break;
 
                 case "9":
