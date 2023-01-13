@@ -27,6 +27,21 @@ public class DepthSearchAlgorithm extends Maze
     }
 
     /*
+     * method that initiates the solving of the maze
+     * @param int x, int y (starting coords)
+     */
+    public void solveMaze()
+    {
+        System.out.println("Unsolved Maze: ");
+        printMaze();
+
+        int x = startPosition[0];
+        int y = startPosition[1];
+
+        traverse(x, y);
+    } 
+
+    /*
      * the method that checks surrounding nodes and moves to
      *  surrounding nodes if they meet certain criteria
      * @param int x, int y

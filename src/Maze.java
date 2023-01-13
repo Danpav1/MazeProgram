@@ -91,26 +91,6 @@ public abstract class Maze
         //creates a 2d string array of the same size as the int 2d array
         solvedMaze = new String[maze.length][maze[0].length];
     }
-
-    /*
-     * method that initiates the solving of the maze
-     * @param int x, int y (starting coords)
-     */
-    public void solveMaze()
-    {
-        System.out.println("Unsolved Maze: ");
-        printMaze();
-
-        int x = startPosition[0];
-        int y = startPosition[1];
-
-        /*
-         * logic can be inputted here for the user to choose what 
-         *  search algorithm they would like to use later
-         */
-        DepthSearchAlgorithm dsa = new DepthSearchAlgorithm(maze);
-        dsa.traverse(x, y);
-    } 
     
     /*
      * method that creates a path within the maze array when 

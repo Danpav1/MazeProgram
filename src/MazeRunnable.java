@@ -14,6 +14,13 @@ public class MazeRunnable
     static int[][] maze;
     static int x, y = 0;
 
+    static int sX = 0;
+    static int sY = 0;
+    static int eX = 0;
+    static int eY = 0;
+
+    static boolean def = false;
+
     /*
      * maze[y][x]
      * some hard coded test mazes
@@ -64,6 +71,7 @@ public class MazeRunnable
                             {1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0},
                             {1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1},
                             {1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0}};
+
     /*
      * method that reads the specific maze file
      * @param String filename
@@ -117,11 +125,30 @@ public class MazeRunnable
             {
                 case "1":
                     valid = true;
-                    DepthSearchAlgorithm dsa = new DepthSearchAlgorithm(m);
-                    dsa.solveMaze();
-                    System.out.println("\nThe solved maze:");
-                    dsa.copyMaze();
-                    dsa.printStringMaze();
+                    if (def)
+                    {
+                        DepthSearchAlgorithm dsa = new DepthSearchAlgorithm(m);
+                        dsa.solveMaze();
+                        System.out.println("\nThe solved maze:");
+                        dsa.copyMaze();
+                        dsa.printStringMaze();
+
+                        System.out.println("using default ---------------------");
+                    }
+                    else
+                    {
+                        DepthSearchAlgorithm dsa = new DepthSearchAlgorithm(m, sX, sY, eX, eY);
+                        dsa.solveMaze();
+                        System.out.println("\nThe solved maze:");
+                        dsa.copyMaze();
+                        dsa.printStringMaze();
+
+                        System.out.println("using overloaded ---------------------");
+                    }
+                    // dsa.solveMaze();
+                    // System.out.println("\nThe solved maze:");
+                    // dsa.copyMaze();
+                    // dsa.printStringMaze();
                 break;
 
                 case "9":
@@ -165,16 +192,19 @@ public class MazeRunnable
                 switch (mazeSelection)
                 {
                     case "1":
+                        startEndSelectionUI();
                         algorithmSelectionUI(maze1);
                         System.exit(0);
                         break;
 
                     case "2":
+                        startEndSelectionUI();
                         algorithmSelectionUI(maze2);
                         System.exit(0);
                         break;
 
                     case "3":
+                        startEndSelectionUI();
                         algorithmSelectionUI(maze3);
                         System.exit(0);
                         break;
@@ -277,14 +307,53 @@ public class MazeRunnable
     }
 
     /*
+     * 
+     */
+    public static void startEndSelectionUI()
+    {
+        Scanner myScanner = new Scanner(System.in);
+
+        System.out.println("What start / end points would you like to use?");
+        System.out.println("1 : start (top left), end (bottom right)");
+        System.out.println("2 : custom points");
+
+        String input = myScanner.nextLine();
+
+        switch (input)
+        {
+            case "1":
+                def = true;
+                break;
+            
+            case "2":
+                Scanner customCoord = new Scanner(System.in);
+
+                System.out.println("Enter the custom start points seperated by a space (no parenthesis): " );
+                
+                sX = customCoord.nextInt();
+                sY = customCoord.nextInt();
+
+                System.out.println("Enter the custom end points seperated by a space (no parenthesis): " );
+
+                eX = customCoord.nextInt();
+                eY = customCoord.nextInt();
+
+            default: 
+        }
+    }
+
+    /*
      * main method
      * @param String[] args
      */
     public static void main(String[] args) throws Exception
     {
+
         mazeSelectionUI();
 
         fileNameSelectionUI();
+
+        startEndSelectionUI();
 
         algorithmSelectionUI(maze);
     }

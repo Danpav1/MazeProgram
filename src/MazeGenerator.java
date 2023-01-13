@@ -21,7 +21,6 @@ public class MazeGenerator
         generatedMaze = new int[numberOfRows][numberOfColumns];
 
         mazeFiller();
-        //printMaze();
     }
 
     /*
