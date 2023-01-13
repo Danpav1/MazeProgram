@@ -92,10 +92,110 @@ public class MazeRunnable
     }
 
     /*
-     * main method
-     * @param String[] args
+     * method that holds the UI for algorithm selection
+     * @param int[][] m
      */
-    public static void main(String[] args) throws Exception
+    public static void algorithmSelectionUI(int[][] m)
+    {
+        /*
+         * algorithm picking screen in console
+         * is expandable to add different algorithms
+         */
+        Scanner algorithmSelector = new Scanner(System.in);
+        boolean valid = false;
+
+        while (!valid)
+            {
+            System.out.println("Which algorithm would you like to choose? Pick the number corresponding to your choice.");
+            System.out.println("\t" + "1 : DepthSearchAlgorithm");
+            System.out.println("\t" + "9 : Exit this selection screen");
+
+            String input = "";
+            input = algorithmSelector.nextLine();
+
+            switch (input)
+            {
+                case "1":
+                    valid = true;
+                    DepthSearchAlgorithm dsa = new DepthSearchAlgorithm(m);
+                    dsa.solveMaze();
+                    System.out.println("\nThe solved maze:");
+                    dsa.copyMaze();
+                    dsa.printStringMaze();
+                break;
+
+                case "9":
+                    System.out.println("Exiting");
+                    algorithmSelector.close();
+                    System.exit(0);
+
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
+        }
+    }
+
+    /*
+     * method that holds the UI for maze selection
+     */
+    public static void mazeSelectionUI()
+    {
+        Scanner hardCodedMazeSelection = new Scanner(System.in);
+
+        System.out.println("Would you like to use one of the included mazes?");
+        System.out.println("\t1 : Yes");
+        System.out.println("\t2 : No");
+        
+        String mazeSelectionInput = hardCodedMazeSelection.nextLine();
+
+        switch (mazeSelectionInput)
+        {
+            case "1":
+                Scanner mazeSelector = new Scanner(System.in);
+
+                System.out.println("Choose a maze: ");
+                System.out.println("\t1 : maze1 (6 by 6)");
+                System.out.println("\t2 : maze2 (11 by 11)");
+                System.out.println("\t3 : maze3 (23 by 23)");
+                System.out.println("\t9 : Exit");
+
+                String mazeSelection = mazeSelector.nextLine();
+
+                switch (mazeSelection)
+                {
+                    case "1":
+                        algorithmSelectionUI(maze1);
+                        System.exit(0);
+                        break;
+
+                    case "2":
+                        algorithmSelectionUI(maze2);
+                        System.exit(0);
+                        break;
+
+                    case "3":
+                        algorithmSelectionUI(maze3);
+                        System.exit(0);
+                        break;
+
+                    case "9":
+                        System.out.println("Exiting");
+                        System.exit(0);
+                        break;
+                    default:
+                        System.out.println("Invalid selection");
+                }
+
+            case "2":
+                break;
+        }
+    }
+
+    /*
+     * method that holds the UI for filename selection
+     */
+    public static void fileNameSelectionUI() throws Exception
     {
         /*
          * filename selection screen in console
@@ -110,8 +210,8 @@ public class MazeRunnable
             Scanner previousSelector = new Scanner(System.in);
         
             System.out.println("Would you like to use the last filename used?");
-            System.out.println("1 : Yes");
-            System.out.println("2 : No");
+            System.out.println("\t1 : Yes");
+            System.out.println("\t2 : No");
 
             String selection = previousSelector.nextLine();
 
@@ -174,45 +274,18 @@ public class MazeRunnable
                  myFileWriter.close();
             }
         }
+    }
 
-        /*
-         * algorithm picking screen in console
-         * is expandable to add different algorithms
-         */
-        Scanner algorithmSelector = new Scanner(System.in);
-        boolean valid = false;
+    /*
+     * main method
+     * @param String[] args
+     */
+    public static void main(String[] args) throws Exception
+    {
+        mazeSelectionUI();
 
-        while (!valid)
-            {
-            System.out.println("Which algorithm would you like to choose? Pick the number corresponding to your choice.");
-            System.out.println("\t" + "1 : DepthSearchAlgorithm");
-            System.out.println("\t" + "9 : Exit this selection screen");
+        fileNameSelectionUI();
 
-            String input = "";
-            input = algorithmSelector.nextLine();
-
-            switch (input)
-            {
-                case "1":
-                    valid = true;
-                    DepthSearchAlgorithm dsa = new DepthSearchAlgorithm(maze);
-                    dsa.solveMaze();
-                    System.out.println("\nThe solved maze:");
-                    dsa.copyMaze();
-                    dsa.printStringMaze();
-                break;
-
-                case "9":
-                    System.out.println("Exiting");
-                    algorithmSelector.close();
-                    System.exit(0);
-
-                default:
-                    System.out.println("Invalid input");
-                    break;
-            }
-        }
-        algorithmSelector.close();
-        fileNameSaver.close();
+        algorithmSelectionUI(maze);
     }
 }
