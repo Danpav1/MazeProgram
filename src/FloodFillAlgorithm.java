@@ -5,14 +5,14 @@ import java.util.EmptyStackException;
  * @author Gooomba
  */
 
-public class DepthSearchAlgorithm extends Maze
+public class FloodFillAlgorithm extends Maze
 {
     /*
      * default constructor for default start and end points 
      *  (top left, bottom right)
      * @param int[][] m
      */
-    public DepthSearchAlgorithm(int[][] m)
+    public FloodFillAlgorithm(int[][] m)
     {
         super(m);
     }
@@ -21,7 +21,7 @@ public class DepthSearchAlgorithm extends Maze
      * overloaded constructor for custom start and end points
      * @param int[][] m, int sX, int sY, int eX, int eY
      */
-    public DepthSearchAlgorithm(int[][] m, int sX, int sY, int eX, int eY)
+    public FloodFillAlgorithm(int[][] m, int sX, int sY, int eX, int eY)
     {
         super(m, sX, sY, eX, eY);
     }
@@ -32,7 +32,7 @@ public class DepthSearchAlgorithm extends Maze
      */
     public void solveMaze()
     {
-        System.out.println("Unsolved Maze: ");
+        System.out.println("\n\t" + "Unsolved Maze: ");
         printMaze();
 
         int x = startPosition[0];
@@ -157,7 +157,8 @@ public class DepthSearchAlgorithm extends Maze
             }
             catch(EmptyStackException e)
             {
-                System.out.println("EmptyStackException - The maze has no path.");
+                System.out.println("\n" + ANSI_RED + "EmptyStackException - The maze has no path." + ANSI_RESET);
+                System.exit(0);
             }  
 
             //takes stack directions

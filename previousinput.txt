@@ -1,1 +1,1 @@
-mazefile.txt
+mazefile2.txt
