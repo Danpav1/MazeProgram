@@ -1,7 +1,7 @@
 import java.util.EmptyStackException;
 
 /*
- * child class of maze
+ * child class of maze that houses the Flood Fill search algorithm
  * @author Gooomba
  */
 
