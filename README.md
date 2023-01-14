@@ -21,4 +21,6 @@ The `JAVA PROJECTS` view allows you to manage your dependencies. More details ca
 
 - add a GUI
 - turn the program into a downloadable exe file that is not machine dependent
-- add another pathfinding algorithm (A*)?
+- add depth first search algorithm
+- add breadth first search algorithm
+- add runtime feature
