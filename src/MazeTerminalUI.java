@@ -102,8 +102,8 @@ public class MazeTerminalUI
         Scanner myScanner = new Scanner(new File(filename));
 
         //reads and saves the first line(s) values which are the scale of the maze
-        y = myScanner.nextInt();
         x = myScanner.nextInt();
+        y = myScanner.nextInt();
 
         //initializes the maze based on the scale we read prior
         maze = new int[y][x];

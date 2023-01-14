@@ -24,7 +24,7 @@ public abstract class Maze
     //end position is bottem right of maze
     int[] endPosition = new int[2];
 
-    //colors used for string maze
+    //colors
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -180,7 +180,7 @@ public abstract class Maze
         boolean isValid = false;
 
         //checks if coordinate is within array bounds (positive)
-        if (x > maze[0].length - 1 || y > maze.length - 1)
+        if (y > maze[0].length - 1 || x > maze.length - 1)
         {
             isValid = false;
             return isValid;
