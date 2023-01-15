@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 /*
  * Runner class for maze
