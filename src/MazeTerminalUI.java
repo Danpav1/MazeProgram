@@ -20,7 +20,7 @@ public class MazeTerminalUI
     static int eX = 0;
     static int eY = 0;
 
-    static boolean def = false;
+    static boolean defaultConstructor = false;
 
     //colors used for contrast 
     public static final String ANSI_RESET = "\u001B[0m";
@@ -300,7 +300,7 @@ public class MazeTerminalUI
         switch (input)
         {
             case "1":
-                def = true;
+                defaultConstructor = true;
                 break;
             
             case "2":
@@ -354,15 +354,15 @@ public class MazeTerminalUI
                 //if FloodFill is selected
                 case "1":
                     valid = true;
-                    if (def)
+                    if (defaultConstructor)
                     {
                         long start = System.currentTimeMillis();
 
-                        FloodFillAlgorithm dsa = new FloodFillAlgorithm(m);
-                        dsa.solveMaze();
+                        FloodFillAlgorithm ffa = new FloodFillAlgorithm(m);
+                        ffa.solveMaze();
                         System.out.println("\n\t" + ANSI_BOLD + "The solved maze:" + ANSI_RESET);
-                        dsa.copyMaze();
-                        dsa.printStringMaze();
+                        ffa.copyMaze();
+                        ffa.printStringMaze();
 
                         long end = System.currentTimeMillis();
                         DecimalFormat formatter = new DecimalFormat("#0.00");
@@ -372,11 +372,11 @@ public class MazeTerminalUI
                     {
                         long start = System.currentTimeMillis();
 
-                        FloodFillAlgorithm dsa = new FloodFillAlgorithm(m, sX, sY, eX, eY);
-                        dsa.solveMaze();
+                        FloodFillAlgorithm ffa = new FloodFillAlgorithm(m, sX, sY, eX, eY);
+                        ffa.solveMaze();
                         System.out.println("\n\t" + ANSI_BOLD +  "The solved maze:" + ANSI_RESET);
-                        dsa.copyMaze();
-                        dsa.printStringMaze();
+                        ffa.copyMaze();
+                        ffa.printStringMaze();
 
                         long end = System.currentTimeMillis();
                         DecimalFormat formatter = new DecimalFormat("#0.00");
@@ -387,9 +387,35 @@ public class MazeTerminalUI
                 //if DepthFirstSearch is selected
                 case "2":
                     valid = true;
-                    DepthFirstSearchAlgorithm dfsa = new DepthFirstSearchAlgorithm(m);
-                    dfsa.solveMaze();
-                    break;
+                    if (defaultConstructor)
+                    {
+                        long start = System.currentTimeMillis();
+
+                        DepthFirstSearchAlgorithm dfsa = new DepthFirstSearchAlgorithm(m);
+                        dfsa.solveMaze();
+                        System.out.println("\n\t" + ANSI_BOLD + "The solved maze:" + ANSI_RESET);
+                        dfsa.copyMaze();
+                        dfsa.printStringMaze();
+
+                        long end = System.currentTimeMillis();
+                        DecimalFormat formatter = new DecimalFormat("#0.00");
+                        System.out.print("\n" + "Execution time is " + formatter.format((end - start)) + " milliseconds");
+                    }
+                    else
+                    {
+                        long start = System.currentTimeMillis();
+
+                        DepthFirstSearchAlgorithm dfsa = new DepthFirstSearchAlgorithm(m, sX, sY, eX, eY);
+                        dfsa.solveMaze();
+                        System.out.println("\n\t" + ANSI_BOLD + "The solved maze:" + ANSI_RESET);
+                        dfsa.copyMaze();
+                        dfsa.printStringMaze();
+
+                        long end = System.currentTimeMillis();
+                        DecimalFormat formatter = new DecimalFormat("#0.00");
+                        System.out.print("\n" + "Execution time is " + formatter.format((end - start)) + " milliseconds");
+                    }
+                break;
 
                 case "9":
                     System.out.println(ANSI_YELLOW + "Exiting" + ANSI_RESET);

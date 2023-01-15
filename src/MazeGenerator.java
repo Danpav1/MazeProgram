@@ -36,7 +36,7 @@ public class MazeGenerator
             {
                 chance = Math.random();
 
-                if (chance > 0.1)
+                if (chance > 0.75)
                 {
                     generatedMaze[row][column] = 0;
                 }
