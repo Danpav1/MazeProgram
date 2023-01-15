@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /*
@@ -355,19 +356,31 @@ public class MazeTerminalUI
                     valid = true;
                     if (def)
                     {
+                        long start = System.currentTimeMillis();
+
                         FloodFillAlgorithm dsa = new FloodFillAlgorithm(m);
                         dsa.solveMaze();
                         System.out.println("\n\t" + ANSI_BOLD + "The solved maze:" + ANSI_RESET);
                         dsa.copyMaze();
                         dsa.printStringMaze();
+
+                        long end = System.currentTimeMillis();
+                        DecimalFormat formatter = new DecimalFormat("#0.00");
+                        System.out.print("\n" + "Execution time is " + formatter.format((end - start)) + " milliseconds");
                     }
                     else
                     {
+                        long start = System.currentTimeMillis();
+
                         FloodFillAlgorithm dsa = new FloodFillAlgorithm(m, sX, sY, eX, eY);
                         dsa.solveMaze();
                         System.out.println("\n\t" + ANSI_BOLD +  "The solved maze:" + ANSI_RESET);
                         dsa.copyMaze();
                         dsa.printStringMaze();
+
+                        long end = System.currentTimeMillis();
+                        DecimalFormat formatter = new DecimalFormat("#0.00");
+                        System.out.print("\n" + "Execution time is " + formatter.format((end - start)) + " milliseconds");
                     }
                 break;
 
