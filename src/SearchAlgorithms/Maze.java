@@ -34,19 +34,7 @@ public abstract class Maze
      *  and the end points are in the bottom right
      * @param int[][] m
      */
-    public Maze(int[][] m)
-    {
-        maze = m;
-
-        //saves the start & end points
-        startPosition[0] = 0;
-        startPosition[1] = 0;
-        endPosition[0] = maze.length - 1;
-        endPosition[1] = maze[0].length - 1;
-
-        //creates a 2d string array of the same size as the int 2d array
-        solvedMaze = new String[maze.length][maze[0].length];
-    }
+    public Maze() {}
 
     /*
      * overloaded constructor to accept custom start and end points

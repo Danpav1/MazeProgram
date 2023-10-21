@@ -20,17 +20,26 @@ public class DepthFirstSearch extends Maze
      */
     public DepthFirstSearch(int[][] m)
     {
-        super(m);
+      this(m, 0, 0, 0, 0);
     }
 
     /*
-     * overloaded constructor for custom start and end points
+     * "overloaded" constructor for custom start and end points
      * 
      * @param int[][] m, int sX, int sY, int eX, int eY
      */
-    public DepthFirstSearch(int[][] m, int sX, int sY, int eX, int eY)
-    {
-        super(m, sX, sY, eX, eY);
+    public DepthFirstSearch(int[][] m, int sX, int sY, int eX, int eY) {
+        super();
+        this.maze = m;
+
+        //saves the start & end points
+        this.startPosition[0] = 0;
+        this.startPosition[1] = 0;
+        this.endPosition[0] = maze.length - 1;
+        this.endPosition[1] = maze[0].length - 1;
+
+        //creates a 2d string array of the same size as the int 2d array
+        this.solvedMaze = new String[maze.length][maze[0].length];
     }
 
     /*
