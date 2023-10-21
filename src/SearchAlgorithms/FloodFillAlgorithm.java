@@ -48,7 +48,7 @@ public class FloodFillAlgorithm extends Maze
      * @param int x, int y
      * @return boolean solved
      */
-    public boolean traverse(int x, int y) 
+    private boolean traverse(int x, int y) 
     {
         //method variables
         boolean solved = false;
@@ -113,7 +113,7 @@ public class FloodFillAlgorithm extends Maze
      * backtracking algorithm
      * @param int x, int y
      */
-    public void backTrack(int x, int y)
+    private void backTrack(int x, int y)
     {
         //method variable(s)
         String directionToTake = "";

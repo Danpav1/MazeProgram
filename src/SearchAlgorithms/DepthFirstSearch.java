@@ -6,11 +6,11 @@ import java.util.EmptyStackException;
  * @author Gooomba
  */
 
-public class DepthFirstSearchAlgorithm extends Maze
+public class DepthFirstSearch extends Maze
 {
     // instance variable(s)
-    String currentDirection = "";
-    boolean solved = false;
+    private String currentDirection = "";
+    private boolean solved = false;
 
     /*
      * default constructor for default start and end points
@@ -18,7 +18,7 @@ public class DepthFirstSearchAlgorithm extends Maze
      * 
      * @param int[][] m
      */
-    public DepthFirstSearchAlgorithm(int[][] m)
+    public DepthFirstSearch(int[][] m)
     {
         super(m);
     }
@@ -28,7 +28,7 @@ public class DepthFirstSearchAlgorithm extends Maze
      * 
      * @param int[][] m, int sX, int sY, int eX, int eY
      */
-    public DepthFirstSearchAlgorithm(int[][] m, int sX, int sY, int eX, int eY)
+    public DepthFirstSearch(int[][] m, int sX, int sY, int eX, int eY)
     {
         super(m, sX, sY, eX, eY);
     }
@@ -50,9 +50,9 @@ public class DepthFirstSearchAlgorithm extends Maze
     }
 
     /*
-     * 
+     * helper method specific for DepthFirstSearch
      */
-    public void followDirection(int x, int y)
+    private void followDirection(int x, int y)
     {
         // reads our current direction, then continues to move that direction
         setToTried(x, y);
@@ -118,7 +118,7 @@ public class DepthFirstSearchAlgorithm extends Maze
      * traverse method
      * @param int x, int y
      */
-    public boolean traverse(int x, int y)
+    private boolean traverse(int x, int y)
     {
         //method variables
 
@@ -187,12 +187,13 @@ public class DepthFirstSearchAlgorithm extends Maze
         return solved;
     }
 
+
     /*
      * backtrack method
      * 
      * @param int x, int y
      */
-    public void backTrack(int x, int y)
+    private void backTrack(int x, int y)
     {
        //method variable(s)
        String directionToTake = "";

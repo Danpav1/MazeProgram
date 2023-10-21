@@ -7,9 +7,9 @@ package Maze;
 public class MazeGenerator
 {
     //instance variables
-    int[][] generatedMaze;
-    int numberOfRows = 0;
-    int numberOfColumns = 0;
+    private int[][] generatedMaze;
+    private int numberOfRows = 0;
+    private int numberOfColumns = 0;
 
     /*
      * Constructor
@@ -17,9 +17,9 @@ public class MazeGenerator
      */
     public MazeGenerator(int x, int y)
     {
-        numberOfRows = x;
-        numberOfColumns = y;
-        generatedMaze = new int[numberOfRows][numberOfColumns];
+        this.numberOfRows = x;
+        this.numberOfColumns = y;
+        this.generatedMaze = new int[numberOfRows][numberOfColumns];
 
         mazeFiller();
     }
@@ -27,7 +27,7 @@ public class MazeGenerator
     /*
      * method that fills the maze randomly with 0's and 1's
      */
-    public void mazeFiller()
+    private void mazeFiller()
     {
         double chance;
 

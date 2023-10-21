@@ -1,5 +1,4 @@
 package SearchAlgorithms;
-
 import java.util.Stack;
 
 /*
@@ -10,20 +9,20 @@ import java.util.Stack;
 public abstract class Maze
 {
     //instance variables
-    int[][] maze;
-    String[][] solvedMaze;
+    protected int[][] maze;
+    protected String[][] solvedMaze;
 
-    Stack<String> directions = new Stack<String>();
+    protected Stack<String> directions = new Stack<String>();
 
-    static final int OPEN = 0;
-    static final int WALL = 1;
-    static final int TRIED = 2;
-    static final int PATH = 3;
+    protected static final int OPEN = 0;
+    protected static final int WALL = 1;
+    protected static final int TRIED = 2;
+    protected static final int PATH = 3;
 
     //start position is top left of maze
-    int[] startPosition = new int[2];
+    protected int[] startPosition = new int[2];
     //end position is bottem right of maze
-    int[] endPosition = new int[2];
+    protected int[] endPosition = new int[2];
 
     //colors
     public static final String ANSI_RESET = "\u001B[0m";
@@ -99,7 +98,7 @@ public abstract class Maze
      *  the maze is solved
      * @param int x, int y
      */
-    public void createPath(int x, int y)
+    protected void createPath(int x, int y)
     {
         //method variable(s)
         String directionToTake = "";
@@ -137,7 +136,7 @@ public abstract class Maze
      * @param int x, int y
      * @return boolean solved
      */
-    public boolean isEnd(int x, int y)
+    protected boolean isEnd(int x, int y)
     {
         //method variables
         boolean solved = false;
@@ -155,7 +154,7 @@ public abstract class Maze
      * sets the node at the coorindates to 3 or PATH
      * @param int x, int y
      */
-    public void setToPath(int x, int y)
+    protected void setToPath(int x, int y)
     {
         maze[x][y] = PATH;
     }
@@ -164,7 +163,7 @@ public abstract class Maze
      * sets the node at the coorindates to 2 or TRIED
      * @param int x, int y
      */
-    public void setToTried(int x, int y)
+    protected void setToTried(int x, int y)
     {
         maze[x][y] = TRIED;
     }
@@ -175,7 +174,7 @@ public abstract class Maze
      * @param int x, int y
      * @return boolean isValid
      */
-    public boolean validPosition(int x, int y)
+    protected boolean validPosition(int x, int y)
     {
         //method variable(s)
         boolean isValid = false;
@@ -206,7 +205,7 @@ public abstract class Maze
     /*
      * method that prints the int maze
      */
-    public void printMaze()
+    protected void printMaze()
     {
         for (int row = 0; row < maze.length; row++)
         {

@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-import SearchAlgorithms.DepthFirstSearchAlgorithm;
+import SearchAlgorithms.DepthFirstSearch;
 import SearchAlgorithms.FloodFillAlgorithm;
 
 /*
@@ -16,15 +16,15 @@ import SearchAlgorithms.FloodFillAlgorithm;
 public class MazeTerminalUI
 {
     //instance variables
-    static int[][] maze;
-    static int x, y = 0;
+    private static int[][] maze;
+    private static int x, y = 0;
 
-    static int sX = 0;
-    static int sY = 0;
-    static int eX = 0;
-    static int eY = 0;
+    private static int sX = 0;
+    private static int sY = 0;
+    private static int eX = 0;
+    private static int eY = 0;
 
-    static boolean defaultConstructor = false;
+    private static boolean defaultConstructor = false;
 
     //colors used for contrast 
     public static final String ANSI_RESET = "\u001B[0m";
@@ -40,14 +40,14 @@ public class MazeTerminalUI
      * 2 = tried
      * 3 = path
      */
-    static int[][] maze1 = {{0, 1, 1, 0, 0, 0}, // 6 by 6
+    private static int[][] maze1 = {{0, 1, 1, 0, 0, 0}, // 6 by 6
                             {0, 0, 0, 0, 1, 1},
                             {0, 1, 1, 0, 0, 0},
                             {0, 0, 0, 1, 1, 0},
                             {0, 1, 1, 0, 1, 0},
                             {0, 0, 0, 0, 1, 0}};
 
-    static int[][] maze2 = {{0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0}, // 11 by 11
+    private static int[][] maze2 = {{0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0}, // 11 by 11
                             {1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0},
                             {0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0},
                             {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
@@ -59,7 +59,7 @@ public class MazeTerminalUI
                             {0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
                             {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0}};
 
-    static int[][] maze3 = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0}, // 23 by 23
+    private static int[][] maze3 = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0}, // 23 by 23
                             {1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0},
                             {1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0},
                             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0},
@@ -102,7 +102,7 @@ public class MazeTerminalUI
      * method that reads the specific maze file
      * @param String filename
      */
-    public static void readMaze(String filename) throws FileNotFoundException
+    private static void readMaze(String filename) throws FileNotFoundException
     {
         Scanner myScanner = new Scanner(new File(filename));
 
@@ -128,7 +128,7 @@ public class MazeTerminalUI
     /*
      * method that holds the UI for maze selection
      */
-    public static void mazeSelectionUI()
+    private static void mazeSelectionUI()
     {
         //empty new line printed for spacing
         System.out.println("");
@@ -201,7 +201,7 @@ public class MazeTerminalUI
     /*
      * method that holds the UI for filename selection
      */
-    public static void fileNameSelectionUI() throws Exception
+    private static void fileNameSelectionUI() throws Exception
     {
         //empty new line printed for spacing
         System.out.println("");
@@ -288,7 +288,7 @@ public class MazeTerminalUI
     /*
      * method that holds the UI for start & end point selection
      */
-    public static void startEndSelectionUI()
+    private static void startEndSelectionUI()
     {
         //empty new line printed for spacing
         System.out.println("");
@@ -331,7 +331,7 @@ public class MazeTerminalUI
      * method that holds the UI for algorithm selection
      * @param int[][] m
      */
-    public static void algorithmSelectionUI(int[][] m)
+    private static void algorithmSelectionUI(int[][] m)
     {
         //empty new line printed for spacing
         System.out.println("");
@@ -395,7 +395,7 @@ public class MazeTerminalUI
                     {
                         long start = System.currentTimeMillis();
 
-                        DepthFirstSearchAlgorithm dfsa = new DepthFirstSearchAlgorithm(m);
+                        DepthFirstSearch dfsa = new DepthFirstSearch(m);
                         dfsa.solveMaze();
                         System.out.println("\n\t" + ANSI_BOLD + "The solved maze:" + ANSI_RESET);
                         dfsa.copyMaze();
@@ -409,7 +409,7 @@ public class MazeTerminalUI
                     {
                         long start = System.currentTimeMillis();
 
-                        DepthFirstSearchAlgorithm dfsa = new DepthFirstSearchAlgorithm(m, sX, sY, eX, eY);
+                        DepthFirstSearch dfsa = new DepthFirstSearch(m, sX, sY, eX, eY);
                         dfsa.solveMaze();
                         System.out.println("\n\t" + ANSI_BOLD + "The solved maze:" + ANSI_RESET);
                         dfsa.copyMaze();
