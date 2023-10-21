@@ -2,7 +2,7 @@ package SearchAlgorithms;
 import java.util.EmptyStackException;
 
 /*
- * child class of maze that houses the Flood Fill search algorithm
+ * child class of maze, houses the Flood Fill search algorithm
  * @author Gooomba
  */
 
@@ -38,14 +38,15 @@ public class FloodFillAlgorithm extends Maze
 
       //creates a 2d string array of the same size as the int 2d array
       this.solvedMaze = new String[maze.length][maze[0].length];
+
+      solveMaze();
   }
 
     /*
      * method that initiates the solving of the maze
      * @param int x, int y (starting coords)
      */
-    public void solveMaze()
-    {
+    public void solveMaze() {
         System.out.println("\n\t" + "Unsolved Maze: ");
         printMaze();
 
@@ -61,8 +62,7 @@ public class FloodFillAlgorithm extends Maze
      * @param int x, int y
      * @return boolean solved
      */
-    private boolean traverse(int x, int y) 
-    {
+    private boolean traverse(int x, int y) {
         //method variables
         boolean solved = false;
 
@@ -118,7 +118,6 @@ public class FloodFillAlgorithm extends Maze
                 backTrack(x, y);
             }
         }
-
         return solved;
     }
 
@@ -126,8 +125,7 @@ public class FloodFillAlgorithm extends Maze
      * backtracking algorithm
      * @param int x, int y
      */
-    private void backTrack(int x, int y)
-    {
+    private void backTrack(int x, int y) {
         //method variable(s)
         String directionToTake = "";
 

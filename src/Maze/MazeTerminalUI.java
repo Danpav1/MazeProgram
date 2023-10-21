@@ -363,7 +363,6 @@ public class MazeTerminalUI
                         long start = System.currentTimeMillis();
 
                         FloodFillAlgorithm ffa = new FloodFillAlgorithm(m);
-                        ffa.solveMaze();
                         System.out.println("\n\t" + ANSI_BOLD + "The solved maze:" + ANSI_RESET);
                         ffa.copyMaze();
                         ffa.printStringMaze();
@@ -377,7 +376,6 @@ public class MazeTerminalUI
                         long start = System.currentTimeMillis();
 
                         FloodFillAlgorithm ffa = new FloodFillAlgorithm(m, sX, sY, eX, eY);
-                        ffa.solveMaze();
                         System.out.println("\n\t" + ANSI_BOLD +  "The solved maze:" + ANSI_RESET);
                         ffa.copyMaze();
                         ffa.printStringMaze();
@@ -396,7 +394,6 @@ public class MazeTerminalUI
                         long start = System.currentTimeMillis();
 
                         DepthFirstSearch dfsa = new DepthFirstSearch(m);
-                        dfsa.solveMaze();
                         System.out.println("\n\t" + ANSI_BOLD + "The solved maze:" + ANSI_RESET);
                         dfsa.copyMaze();
                         dfsa.printStringMaze();
@@ -410,7 +407,6 @@ public class MazeTerminalUI
                         long start = System.currentTimeMillis();
 
                         DepthFirstSearch dfsa = new DepthFirstSearch(m, sX, sY, eX, eY);
-                        dfsa.solveMaze();
                         System.out.println("\n\t" + ANSI_BOLD + "The solved maze:" + ANSI_RESET);
                         dfsa.copyMaze();
                         dfsa.printStringMaze();

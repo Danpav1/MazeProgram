@@ -2,10 +2,9 @@ package SearchAlgorithms;
 import java.util.EmptyStackException;
 
 /*
- * child class of maze that houses the Depth-First search algorithm
+ * child class of maze, houses the Depth-First search algorithm
  * @author Gooomba
  */
-
 public class DepthFirstSearch extends Maze
 {
     // instance variable(s)
@@ -43,6 +42,8 @@ public class DepthFirstSearch extends Maze
 
         //creates a 2d string array of the same size as the int 2d array
         this.solvedMaze = new String[maze.length][maze[0].length];
+
+        solveMaze();
     }
 
     /*
