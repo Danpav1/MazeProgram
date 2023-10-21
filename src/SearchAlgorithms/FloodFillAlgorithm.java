@@ -125,7 +125,8 @@ public class FloodFillAlgorithm extends Maze
     
     //makes sure the maze has a path
     if (directions.isEmpty() == true) {
-      System.out.println("Maze has no path");
+      System.out.println("\nMaze has no path");
+      System.exit(1);
     }
     else {
       directionToTake = directions.pop();
