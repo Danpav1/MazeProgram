@@ -1,11 +1,12 @@
 package SearchAlgorithms;
 import java.util.Stack;
 
+import Exceptions.BadStartEndCordsException;
+
 /*
  * Program that solves a maze
  * @author Gooomba
  */
-
 public abstract class Maze
 {
     //instance variables
@@ -29,56 +30,30 @@ public abstract class Maze
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RED = "\u001B[31m";
 
-    /*
-     * default constructor where the start points are in the top left
-     *  and the end points are in the bottom right
-     * @param int[][] m
-     */
+    //constructor
     public Maze() {}
 
-    /*
-     * overloaded constructor to accept custom start and end points
-     * @param @param int[][] m, int sX, int sY, int eX, int eY
+    /**
+     * helper method that checks if the start and end coords given are out of bounds for
+     *  our maze array.
+     * @param sX
+     * @param sY
+     * @param eX
+     * @param eY
+     * @return
      */
-    public Maze(int[][] m, int sX, int sY, int eX, int eY)
-    {
-        maze = m;
-
-        //handling for bad start and end coords
-        boolean error = false;
-        if (sX < 0 || sX > maze.length - 1)
-        {
-            System.out.println("Inputted start x coordinate out of array bounds");
-            error = true;
+    protected boolean startEndPointValidation(int sX, int sY, int eX, int eY) {
+        boolean badStartCords = true;
+        if (sX < 0 || sX > maze.length - 1) {
+          throw new BadStartEndCordsException("Invalid start X coordinate");
+        } else if (sY < 0 || sY > maze[0].length - 1) {
+          throw new BadStartEndCordsException("Invalid start Y coordinate");
+        } else if (eX < 0 || eX > maze.length - 1) {
+          throw new BadStartEndCordsException("Invalid end X coordinate");
+        } else if (eY < 0 || eY > maze[0].length - 1) {
+          throw new BadStartEndCordsException("Invalid end Y coordinate");
         }
-        if (sY < 0 || sY > maze[0].length - 1)
-        {
-            System.out.println("Inputted start y coordinate out of array bounds");
-            error = true;
-        }
-        if (eX < 0 || eX > maze.length - 1)
-        {
-            System.out.println("Inputted end x coordinate out of array bounds");
-            error = true;
-        }
-        if (eY < 0 || eY > maze[0].length - 1)
-        {
-            System.out.println("Inputted end y coordinate out of array bounds");
-            error = true;
-        }
-        if (error)
-        {
-            System.exit(0);
-        }
-
-        //saves the start & end points
-        startPosition[0] = sX;
-        startPosition[1] = sY;
-        endPosition[0] = eX;
-        endPosition[1] = eY;
-
-        //creates a 2d string array of the same size as the int 2d array
-        solvedMaze = new String[maze.length][maze[0].length];
+        return badStartCords;
     }
     
     /*

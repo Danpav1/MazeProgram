@@ -32,6 +32,9 @@ public class DepthFirstSearch extends Maze
         super();
         this.maze = m;
 
+        //checks if the start / end coords are within bounds, throws exception if they arent
+        startEndPointValidation(sX, sY, eX, eY);
+
         //saves the start & end points
         this.startPosition[0] = 0;
         this.startPosition[1] = 0;
