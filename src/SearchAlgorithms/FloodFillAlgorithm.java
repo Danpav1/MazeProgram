@@ -15,7 +15,7 @@ public class FloodFillAlgorithm extends Maze
      */
     public FloodFillAlgorithm(int[][] m)
     {
-        this(m, 0, 0, 0, 0);
+        this(m, 0, 0, m.length - 1, m[0].length - 1);
     }
 
     /*
