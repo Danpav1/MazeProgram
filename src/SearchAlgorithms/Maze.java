@@ -36,22 +36,22 @@ public abstract class Maze
     /**
      * helper method that checks if the start and end coords given are out of bounds for
      *  our maze array.
-     * @param sX
-     * @param sY
-     * @param eX
-     * @param eY
+     * @param sRow
+     * @param sCol
+     * @param eRow
+     * @param eCol
      * @return
      */
-    protected boolean startEndPointValidation(int sX, int sY, int eX, int eY) {
+    protected boolean startEndPointValidation(int sRow, int sCol, int eRow, int eCol) {
         boolean badStartCords = true;
-        if (sX < 0 || sX > maze.length - 1) {
-          throw new BadStartEndCordsException("Invalid start X coordinate");
-        } else if (sY < 0 || sY > maze[0].length - 1) {
-          throw new BadStartEndCordsException("Invalid start Y coordinate");
-        } else if (eX < 0 || eX > maze.length - 1) {
-          throw new BadStartEndCordsException("Invalid end X coordinate");
-        } else if (eY < 0 || eY > maze[0].length - 1) {
-          throw new BadStartEndCordsException("Invalid end Y coordinate");
+        if (sRow < 0 || sRow > maze.length - 1) {
+          throw new BadStartEndCordsException("Invalid start row");
+        } else if (sCol < 0 || sCol > maze[0].length - 1) {
+          throw new BadStartEndCordsException("Invalid start col");
+        } else if (eRow < 0 || eRow > maze.length - 1) {
+          throw new BadStartEndCordsException("Invalid end row");
+        } else if (eCol < 0 || eCol > maze[0].length - 1) {
+          throw new BadStartEndCordsException("Invalid end col");
         }
         return badStartCords;
     }
@@ -59,15 +59,15 @@ public abstract class Maze
     /*
      * method that creates a path within the maze array when 
      *  the maze is solved
-     * @param int x, int y
+     * @param int row, int col
      */
-    protected void createPath(int x, int y)
+    protected void createPath(int row, int col)
     {
         //method variable(s)
         String directionToTake = "";
 
         //mark current as part of the path
-        maze[x][y] = PATH;
+        maze[row][col] = PATH;
 
         //takes stacks' directions while it has directions within it
         while (!directions.empty())
@@ -77,35 +77,35 @@ public abstract class Maze
             //takes stack directions
             if (directionToTake == "up")
             {
-                createPath(x - 1, y);
+                createPath(row - 1, col);
             }
             else if (directionToTake == "left")
             {
-                createPath(x, y - 1);
+                createPath(row, col - 1);
             }
             else if (directionToTake == "right")
             {
-                createPath(x, y + 1);
+                createPath(row, col + 1);
             }
             else if (directionToTake == "down")
             {
-                createPath(x + 1, y);
+                createPath(row + 1, col);
             }
         }
     }
 
     /*
      * checks if the node is the end node
-     * @param int x, int y
+     * @param int row, int col
      * @return boolean solved
      */
-    protected boolean isEnd(int x, int y)
+    protected boolean isEnd(int row, int col)
     {
         //method variables
         boolean solved = false;
 
         //logic
-        if (x == endPosition[0] && y == endPosition[1])
+        if (row == endPosition[0] && col == endPosition[1])
         {
             solved = true;
         }
@@ -115,49 +115,49 @@ public abstract class Maze
 
     /*
      * sets the node at the coorindates to 3 or PATH
-     * @param int x, int y
+     * @param int row, int col
      */
-    protected void setToPath(int x, int y)
+    protected void setToPath(int row, int col)
     {
-        maze[x][y] = PATH;
+        maze[row][col] = PATH;
     }
 
     /*
      * sets the node at the coorindates to 2 or TRIED
-     * @param int x, int y
+     * @param int row, int col
      */
-    protected void setToTried(int x, int y)
+    protected void setToTried(int row, int col)
     {
-        maze[x][y] = TRIED;
+        maze[row][col] = TRIED;
     }
 
     /*
      * checks the validity of the position the maze solver
      *  wants to go to next
-     * @param int x, int y
+     * @param int row, int col
      * @return boolean isValid
      */
-    protected boolean validPosition(int x, int y)
+    protected boolean validPosition(int row, int col)
     {
         //method variable(s)
         boolean isValid = false;
 
         //checks if coordinate is within array bounds (positive)
-        if (y > maze[0].length - 1 || x > maze.length - 1)
+        if (col > maze[0].length - 1 || row > maze.length - 1)
         {
             isValid = false;
             return isValid;
         }
 
         //checks if coordinate is within array bounds (negative)
-        if (x < 0 || y < 0)
+        if (row < 0 || col < 0)
             {
                 isValid = false;
                 return isValid;
             }
 
         //checks if coordinate is anything but OPEN
-        if (maze[x][y] == OPEN)
+        if (maze[row][col] == OPEN)
         {
             isValid = true;
         }
