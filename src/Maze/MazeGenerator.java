@@ -1,3 +1,4 @@
+package Maze;
 /*
  * Class that generates mazes
  * @author Gooomba

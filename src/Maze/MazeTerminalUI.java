@@ -1,8 +1,12 @@
+package Maze;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.text.DecimalFormat;
 import java.util.Scanner;
+
+import SearchAlgorithms.DepthFirstSearchAlgorithm;
+import SearchAlgorithms.FloodFillAlgorithm;
 
 /*
  * class that houses the UI for this program

@@ -1,8 +1,4 @@
-
-/*
- * Runner class for maze
- * @author Gooomba
- */
+package Maze;
 
 public class MazeRunnable
 {

@@ -1,3 +1,4 @@
+package SearchAlgorithms;
 import java.util.EmptyStackException;
 
 /*
