@@ -17,12 +17,12 @@ public class MazeTerminalUI
 {
     //instance variables
     private static int[][] maze;
-    private static int x, y = 0;
+    private static int row, col = 0;
 
-    private static int sX = 0;
-    private static int sY = 0;
-    private static int eX = 0;
-    private static int eY = 0;
+    private static int sRow = 0;
+    private static int sCol = 0;
+    private static int eRow = 0;
+    private static int eCol = 0;
 
     private static boolean defaultConstructor = false;
 
@@ -33,7 +33,7 @@ public class MazeTerminalUI
     public static final String ANSI_BOLD = "\u001B[1m";
 
     /*
-     * maze[y][x]
+     * maze[col][row]
      * some hard coded test mazes
      * 0 = open
      * 1 = wall
@@ -41,47 +41,47 @@ public class MazeTerminalUI
      * 3 = path
      */
     private static int[][] maze1 = {{0, 1, 1, 0, 0, 0}, // 6 by 6
-                            {0, 0, 0, 0, 1, 1},
-                            {0, 1, 1, 0, 0, 0},
-                            {0, 0, 0, 1, 1, 0},
-                            {0, 1, 1, 0, 1, 0},
-                            {0, 0, 0, 0, 1, 0}};
+                                    {0, 0, 0, 0, 1, 1},
+                                    {0, 1, 1, 0, 0, 0},
+                                    {0, 0, 0, 1, 1, 0},
+                                    {0, 1, 1, 0, 1, 0},
+                                    {0, 0, 0, 0, 1, 0}};
 
     private static int[][] maze2 = {{0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0}, // 11 by 11
-                            {1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0},
-                            {0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0},
-                            {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
-                            {0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1},
-                            {1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0},
-                            {1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0},
-                            {0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0},
-                            {0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-                            {0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
-                            {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0}};
+                                  {1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0},
+                                  {0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0},
+                                  {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+                                  {0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1},
+                                  {1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0},
+                                  {1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0},
+                                  {0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0},
+                                  {0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+                                  {0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+                                  {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0}};
 
     private static int[][] maze3 = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0}, // 23 by 23
-                            {1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0},
-                            {1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0},
-                            {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0},
-                            {0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1},
-                            {0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0},
-                            {0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0},
-                            {0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
-                            {0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0},
-                            {0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0},
-                            {0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0},
-                            {0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0},
-                            {0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0},
-                            {0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0},
-                            {1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0},
-                            {1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0},
-                            {0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
-                            {1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0},
-                            {1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0},
-                            {1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0},
-                            {1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1},
-                            {1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0}};
+                                    {1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0},
+                                    {1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0},
+                                    {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0},
+                                    {0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1},
+                                    {0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0},
+                                    {0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0},
+                                    {0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
+                                    {0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0},
+                                    {0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0},
+                                    {0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0},
+                                    {0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0},
+                                    {0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0},
+                                    {0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0},
+                                    {1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0},
+                                    {1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0},
+                                    {0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
+                                    {1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0},
+                                    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0},
+                                    {1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0},
+                                    {1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0},
+                                    {1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1},
+                                    {1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0}};
 
     
     /*
@@ -107,19 +107,19 @@ public class MazeTerminalUI
         Scanner myScanner = new Scanner(new File(filename));
 
         //reads and saves the first line(s) values which are the scale of the maze
-        x = myScanner.nextInt();
-        y = myScanner.nextInt();
+        row = myScanner.nextInt();
+        col = myScanner.nextInt();
 
         //initializes the maze based on the scale we read prior
-        maze = new int[y][x];
+        maze = new int[col][row];
 
         //reads the file and puts the values within the maze
-        for (int row = 0; row < y; row++)
+        for (int x = 0; x < row; x++)
         {
-            for (int column = 0; column < x; column++)
+            for (int y = 0; y < col; y++)
             {
                 int temp = myScanner.nextInt();
-                maze[row][column] = temp;
+                maze[x][y] = temp;
             }
         }
         myScanner.close();
@@ -312,13 +312,13 @@ public class MazeTerminalUI
 
                 System.out.println("Enter the custom start points seperated by a space (no parenthesis): " );
                 
-                sX = customCoord.nextInt();
-                sY = customCoord.nextInt();
+                sRow = customCoord.nextInt();
+                sCol = customCoord.nextInt();
 
                 System.out.println("Enter the custom end points seperated by a space (no parenthesis): " );
 
-                eX = customCoord.nextInt();
-                eY = customCoord.nextInt();
+                eRow = customCoord.nextInt();
+                eCol = customCoord.nextInt();
 
             //if the selection doesnt match any of the cases
             default:
@@ -375,7 +375,7 @@ public class MazeTerminalUI
                     {
                         long start = System.currentTimeMillis();
 
-                        FloodFillAlgorithm ffa = new FloodFillAlgorithm(m, sX, sY, eX, eY);
+                        FloodFillAlgorithm ffa = new FloodFillAlgorithm(m, sRow, sCol, eRow, eCol);
                         System.out.println("\n\t" + ANSI_BOLD +  "The solved maze:" + ANSI_RESET);
                         ffa.copyMaze();
                         ffa.printStringMaze();
@@ -406,7 +406,7 @@ public class MazeTerminalUI
                     {
                         long start = System.currentTimeMillis();
 
-                        DepthFirstSearch dfsa = new DepthFirstSearch(m, sX, sY, eX, eY);
+                        DepthFirstSearch dfsa = new DepthFirstSearch(m, sRow, sCol, eRow, eCol);
                         System.out.println("\n\t" + ANSI_BOLD + "The solved maze:" + ANSI_RESET);
                         dfsa.copyMaze();
                         dfsa.printStringMaze();

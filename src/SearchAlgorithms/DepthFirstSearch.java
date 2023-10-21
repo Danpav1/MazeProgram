@@ -43,6 +43,7 @@ public class DepthFirstSearch extends Maze
         //creates a 2d string array of the same size as the int 2d array
         this.solvedMaze = new String[maze.length][maze[0].length];
 
+        //solves the maze
         solveMaze();
     }
 
@@ -63,7 +64,7 @@ public class DepthFirstSearch extends Maze
     }
 
     /*
-     * helper method specific for DepthFirstSearch
+     * helper method for solving the maze specific for DepthFirstSearch
      */
     private void followDirection(int x, int y)
     {
@@ -133,8 +134,6 @@ public class DepthFirstSearch extends Maze
      */
     private boolean traverse(int x, int y)
     {
-        //method variables
-
         //sets the inputted coords to TRIED (2)
         setToTried(x, y);
 
