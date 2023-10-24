@@ -199,7 +199,30 @@ public class DepthFirstSearch extends Maze
   private void backTrack(int row, int col) {
     //method variable(s)
     String directionToTake = "";
-    
+
+    //checks the surrounding nodes to take a new path
+    if (validPosition(row + 1, col)) { //down
+      directions.push("up");
+      traverse(row + 1, col);
+    } else if (validPosition(row - 1, col)) { //up
+      directions.push("down");
+      traverse(row - 1, col);
+    } else if (validPosition(row, col + 1)) { //right
+      directions.push("left");
+      traverse(row, col + 1);
+    } else if (validPosition(row, col - 1)) { //left
+      directions.push("right");
+      traverse(row, col - 1);
+    }
+    /*
+     * I have no idea why but if we dont have this if statement the
+     *  createPath goes rogue and just breaks everything. Debugging
+     *  also just spazzes out. 
+     */
+    if (this.solved) {
+      return;
+    }
+
     //makes sure the maze has a path
     if (directions.isEmpty() == true) {
       System.out.println("\nMaze has no path");

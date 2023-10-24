@@ -63,8 +63,6 @@ public class FloodFillAlgorithm extends Maze
   * @return boolean solved
   */
   private boolean traverse(int row, int col) {
-    //method variables
-    boolean solved = false;
     
     //sets the inputted coords to TRIED (2)
     setToTried(row, col);
@@ -72,47 +70,50 @@ public class FloodFillAlgorithm extends Maze
     //checks if the inputted coords are the end coords
     if (isEnd(row, col))
     {
-      solved = true;
+      this.solved = true;
       createPath(row, col);
+      return this.solved;
     }
-    
-    //try up
-    else if (validPosition(row - 1, col))
-    {
-      directions.push("down");
-      traverse(row - 1, col);
+    else {
+      
+      //try up
+      if (validPosition(row - 1, col))
+      {
+        directions.push("down");
+        traverse(row - 1, col);
+      }
+      
+      //try left
+      else if (validPosition(row, col - 1))
+      {
+        directions.push("right");
+        traverse(row, col - 1);
+      }
+      
+      //try right
+      else if (validPosition(row, col + 1))
+      {
+        directions.push("left");
+        traverse(row, col + 1);
+      }
+      
+      //try down
+      else if (validPosition(row + 1, col))
+      {
+        directions.push("up");
+        traverse(row + 1, col);
+      }
+      
+      /*
+      * since all four directions are not valid (deadend)
+      *  we iniatiate the backtrack algorithm
+      */
+      else
+      {
+        backTrack(row, col);
+      }
     }
-    
-    //try left
-    else if (validPosition(row, col - 1))
-    {
-      directions.push("right");
-      traverse(row, col - 1);
-    }
-    
-    //try right
-    else if (validPosition(row, col + 1))
-    {
-      directions.push("left");
-      traverse(row, col + 1);
-    }
-    
-    //try down
-    else if (validPosition(row + 1, col))
-    {
-      directions.push("up");
-      traverse(row + 1, col);
-    }
-    
-    /*
-    * since all four directions are not valid (deadend)
-    *  we iniatiate the backtrack algorithm
-    */
-    else
-    {
-      backTrack(row, col);
-    }
-    return solved;
+    return this.solved;
   }
   
   /*
@@ -122,7 +123,30 @@ public class FloodFillAlgorithm extends Maze
   private void backTrack(int row, int col) {
     //method variable(s)
     String directionToTake = "";
-    
+
+    //checks the surrounding nodes to take a new path
+    if (validPosition(row + 1, col)) { //down
+      directions.push("up");
+      traverse(row + 1, col);
+    } else if (validPosition(row - 1, col)) { //up
+      directions.push("down");
+      traverse(row - 1, col);
+    } else if (validPosition(row, col + 1)) { //right
+      directions.push("left");
+      traverse(row, col + 1);
+    } else if (validPosition(row, col - 1)) { //left
+      directions.push("right");
+      traverse(row, col - 1);
+    }
+    /*
+     * I have no idea why but if we dont have this if statement the
+     *  createPath goes rogue and just breaks everything. Debugging
+     *  also just spazzes out. 
+     */
+    if (this.solved) {
+      return;
+    }
+
     //makes sure the maze has a path
     if (directions.isEmpty() == true) {
       System.out.println("\nMaze has no path");
