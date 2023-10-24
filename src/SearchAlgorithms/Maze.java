@@ -76,10 +76,7 @@ public abstract class Maze
       return;
     } else {
       directionToTake = directions.pop();
-      
-      System.out.println("");
-      System.out.println(directionToTake);
-      
+          
       //takes stack directions
       if (directionToTake == "up")
       {

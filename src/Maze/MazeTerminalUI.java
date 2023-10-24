@@ -218,7 +218,7 @@ public class MazeTerminalUI
 
             Scanner previousSelector = new Scanner(System.in);
         
-            System.out.println("Would you like to use the last filename used?");
+            System.out.println("Would you like to use the last filename used? (" + fileNameSaverinput + ")");
             System.out.println("\t" + "1 : Yes");
             System.out.println("\t" + "2 : No");
 
