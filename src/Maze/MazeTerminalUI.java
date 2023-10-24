@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-import SearchAlgorithms.DepthFirstSearch;
+import SearchAlgorithms.DepthFirstSearchAlgorithm;
 import SearchAlgorithms.FloodFillAlgorithm;
 
 /*
@@ -393,7 +393,7 @@ public class MazeTerminalUI
                     {
                         long start = System.currentTimeMillis();
 
-                        DepthFirstSearch dfsa = new DepthFirstSearch(m);
+                        DepthFirstSearchAlgorithm dfsa = new DepthFirstSearchAlgorithm(m);
                         System.out.println("\n\t" + ANSI_BOLD + "The solved maze:" + ANSI_RESET);
                         dfsa.copyMaze();
                         dfsa.printStringMaze();
@@ -406,7 +406,7 @@ public class MazeTerminalUI
                     {
                         long start = System.currentTimeMillis();
 
-                        DepthFirstSearch dfsa = new DepthFirstSearch(m, sRow, sCol, eRow, eCol);
+                        DepthFirstSearchAlgorithm dfsa = new DepthFirstSearchAlgorithm(m, sRow, sCol, eRow, eCol);
                         System.out.println("\n\t" + ANSI_BOLD + "The solved maze:" + ANSI_RESET);
                         dfsa.copyMaze();
                         dfsa.printStringMaze();

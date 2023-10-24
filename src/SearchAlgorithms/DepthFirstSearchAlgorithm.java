@@ -4,7 +4,7 @@ package SearchAlgorithms;
 * child class of maze, houses the Depth-First search algorithm
 * @author Gooomba
 */
-public class DepthFirstSearch extends Maze
+public class DepthFirstSearchAlgorithm extends Maze
 {
   // instance variable(s)
   private String currentDirection = "";
@@ -16,7 +16,7 @@ public class DepthFirstSearch extends Maze
   * 
   * @param int[][] m
   */
-  public DepthFirstSearch(int[][] m)
+  public DepthFirstSearchAlgorithm(int[][] m)
   {
     this(m, 0, 0, m.length - 1, m[0].length - 1);
   }
@@ -26,7 +26,7 @@ public class DepthFirstSearch extends Maze
   * 
   * @param int[][] m, int sRow, int sCol, int eRow, int eCol
   */
-  public DepthFirstSearch(int[][] m, int sRow, int sCol, int eRow, int eCol) {
+  public DepthFirstSearchAlgorithm(int[][] m, int sRow, int sCol, int eRow, int eCol) {
     super();
     this.maze = m;
     
